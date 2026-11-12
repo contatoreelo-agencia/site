@@ -50,6 +50,17 @@ const CONTATOS = {
     else { msg.textContent = 'Recebemos o seu interesse aqui, mas o envio ainda está sendo ativado. Em breve este botão abre a conversa com a Reelô.'; }
   });
 
+  /* vídeos que abrem dentro da página (sem sair do site) */
+  document.querySelectorAll('.vid').forEach(b => b.addEventListener('click', () => {
+    const lb = document.createElement('div'); lb.className = 'lb'; lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Vídeo');
+    const v = document.createElement('video'); v.src = b.dataset.video; v.controls = true; v.autoplay = true; v.playsInline = true; v.setAttribute('controlsList', 'nodownload'); v.poster = b.dataset.poster || '';
+    const x = document.createElement('button'); x.className = 'lb__x'; x.type = 'button'; x.setAttribute('aria-label', 'Fechar vídeo'); x.textContent = '×';
+    lb.append(v, x); document.body.append(lb); document.body.style.overflow = 'hidden'; x.focus();
+    const fechar = () => { v.pause(); lb.remove(); document.body.style.overflow = ''; document.removeEventListener('keydown', esc); b.focus(); };
+    const esc = e => { if (e.key === 'Escape') fechar(); };
+    x.addEventListener('click', fechar); lb.addEventListener('click', e => { if (e.target === lb) fechar(); }); document.addEventListener('keydown', esc);
+  }));
+
   /* entrada suave das seções */
   if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion:reduce)').matches) {
     const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: .12 });
