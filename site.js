@@ -1,7 +1,7 @@
 /* Contatos reais: preencha aqui e o site liga tudo sozinho. Deixe vazio o que ainda não existe. */
 const CONTATOS = {
-  whatsapp: "",   // só números com DDI e DDD, ex.: 5511900000000
-  email: "",      // ex.: contato@reeloagencia.com
+  whatsapp: "5511968186328",   // só números com DDI e DDD, ex.: 5511900000000
+  email: "contato@reeloagencia.com",      // ex.: contato@reeloagencia.com
   instagram: "",  // ex.: https://instagram.com/usuario
   youtube: "",
   linkedin: ""
@@ -30,9 +30,14 @@ const CONTATOS = {
     if (h) { a.href = h; a.target = '_blank'; a.rel = 'noopener'; } else { a.style.display = 'none'; }
   });
 
+  /* botões que abrem o WhatsApp com mensagem pronta */
+  document.querySelectorAll('[data-wa]').forEach(a => {
+    if (CONTATOS.whatsapp) { a.href = 'https://wa.me/' + CONTATOS.whatsapp + '?text=' + encodeURIComponent(a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; }
+  });
+
   /* formulário: abre WhatsApp ou e-mail com a mensagem pronta */
   const form = document.getElementById('form'), msg = document.getElementById('formMsg');
-  form.addEventListener('submit', e => {
+  if (form) form.addEventListener('submit', e => {
     e.preventDefault();
     const d = Object.fromEntries(new FormData(form));
     let ok = true;
@@ -48,6 +53,6 @@ const CONTATOS = {
   /* entrada suave das seções */
   if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion:reduce)').matches) {
     const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: .12 });
-    document.querySelectorAll('.cab,.painel,.lista li,.pacote,.avulsos>div,.proj,.passos li,.faq__itens,.form').forEach(el => { el.classList.add('rv'); io.observe(el); });
+    document.querySelectorAll('.cab,.card,.tira figure,.texto,.painel,.lista li,.pacote,.avulsos>div,.proj,.passos li,.faq__itens,.form').forEach(el => { el.classList.add('rv'); io.observe(el); });
   }
 })();
