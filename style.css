@@ -286,3 +286,59 @@ details p{padding:0 56px 26px 0;font-size:18px;opacity:.8;max-width:680px}
   .rodape{padding:72px 0 32px}.rodape__cols{gap:40px;flex-wrap:wrap}.rodape__c{margin-top:64px}
   .tr--cab b:nth-child(2),.tr--cab b:nth-child(3),.tr--cab b:nth-child(4){font-size:13px;overflow-wrap:anywhere}
 }
+
+/* ===== atualização Figma 2026-11-17 ===== */
+/* texto justificado, como no Figma */
+.lead,.painel p,.nota,.lista p,details p{text-align:justify}
+.pc__desc{text-align:left;hyphens:none}
+/* dor: imagens novas */
+.painel{gap:28px}.painel--azul{justify-content:center}
+.painel h3{font-size:30px;line-height:1.15;font-weight:600;letter-spacing:-.01em}
+.dor__img{width:100%;height:auto;aspect-ratio:571/455;object-fit:cover}
+.dor__caminho{position:relative;width:100%;aspect-ratio:571/455;background:#1835F3;border-radius:25px;overflow:hidden}
+.dor__crop{position:absolute;left:0;right:0;top:19.56%;height:61.1%;overflow:hidden}
+.dor__crop img{position:absolute;max-width:none;width:110.16%;height:180.2%;left:-5.08%;top:-23.19%}
+/* pacotes e comparativo (tabela única) */
+#pacotes .cab .lead{max-width:1000px;font-size:22px}
+#pacotes .cab h2{max-width:none}
+.pcs{display:grid;grid-template-columns:minmax(0,1.39fr) repeat(3,minmax(0,1fr));gap:16px;margin-bottom:56px;align-items:stretch}
+.pcs__lab h3{font-size:24px;font-weight:700;letter-spacing:0;padding-top:24px}
+.pcs__labtop{height:350px}
+.pcs__labtop p{font-size:16px;opacity:.7;margin-top:14px;max-width:352px}
+.pcs__lab li,.pc__rows li{height:48px;border-top:1px solid rgba(245,242,233,.14);display:flex;align-items:center}
+.pcs__lab li{font-size:16px;opacity:.9}
+.pc{border-radius:28px;padding:0 24px 24px;display:flex;flex-direction:column;min-width:0}
+.pc__top{height:350px;padding-top:26px}
+.pc__eb{display:block;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.pc h3{font-size:36px;font-weight:700;letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+.pc__sub{font-size:15px;opacity:.8;margin-top:10px}
+.pc__preco{margin-top:18px;border-radius:18px;padding:10px 16px;height:74px}
+.pc__preco small{display:block;font-size:13px;opacity:.7;line-height:1.2}
+.pc__preco p{display:flex;align-items:baseline;gap:6px;margin-top:2px}
+.pc__preco b{font-size:34px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+.pc__preco span{font-size:16px;opacity:.8}
+.pc__desc{font-size:15px;line-height:1.4;margin-top:14px}
+.pc__rows{flex:1}
+.pc__rows li{justify-content:center;font-size:16px;font-weight:500;text-align:center;border-top-color:rgba(21,26,45,.16)}
+.pc__rows .c--no{font-weight:400;opacity:.4}
+.pc__btn{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:999px;font-size:16px;font-weight:600;text-decoration:none;margin-top:20px;transition:transform .2s ease}
+.pc__btn:hover{transform:translateY(-2px)}
+.pc--start{background:var(--creme);color:var(--ink)}.pc--start .pc__preco{background:rgba(21,26,45,.09)}.pc--start .pc__preco b{color:var(--azul)}.pc--start .pc__btn{background:var(--ink);color:var(--creme)}
+.pc--perf{background:var(--cha);color:var(--ink)}.pc--perf .pc__preco{background:rgba(21,26,45,.09)}.pc--perf .pc__btn{background:var(--ink);color:var(--cha)}
+.pc--scale{background:var(--azul);color:var(--creme)}.pc--scale .pc__preco{background:rgba(245,242,233,.09)}.pc--scale .pc__preco b{color:var(--cha)}.pc--scale .pc__btn{background:var(--cha);color:var(--ink)}
+.pc--scale .pc__rows li{border-top-color:rgba(245,242,233,.16)}
+#pacotes .nota{font-size:22px;max-width:1100px;opacity:1;color:#C9CCDA;margin-bottom:56px}
+#pacotes .avulsos h4{font-size:22px;font-weight:400;letter-spacing:0}
+#pacotes .avulsos .v{font-size:18px;font-weight:500}
+#pacotes .avulsos p:last-child{font-size:18px;opacity:1;color:#C9CCDA;line-height:1.5}
+#pacotes .avulsos>div{border-top-color:#4A5380;padding-top:24px;gap:8px}
+@media (max-width:1100px){
+  .pcs{grid-template-columns:1fr;gap:20px}.pcs__lab{display:none}
+  .pc__top{height:auto;padding-bottom:20px}
+  .pc__rows li{justify-content:space-between;gap:16px}
+  .pc__rows li::before{content:attr(data-l);font-weight:400;font-size:15px;opacity:.85;text-align:left}
+}
+@media (max-width:820px){
+  #pacotes .cab .lead,#pacotes .nota{font-size:17px}
+  .painel h3{font-size:24px}
+}
