@@ -213,9 +213,12 @@ details p{padding:0 56px 26px 0;font-size:18px;opacity:.8;max-width:680px}
 /* contato */
 .contato{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:start}
 .contato .lead{margin:28px 0 36px}
-.mini-passos{display:flex;gap:26px;flex-wrap:wrap}
-.mini-passos li{display:flex;align-items:center;gap:10px;font-weight:600}
-.mini-passos i{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(245,242,233,.4);font:600 13px 'Inter';font-style:normal;color:var(--cha)}
+.mini-passos{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+.mini-passos li{display:flex;flex-direction:column;gap:6px;padding:20px;border-radius:18px;background:rgba(245,242,233,.07);border:1px solid rgba(245,242,233,.12)}
+.mini-passos i{font:700 14px/1 'Inter';font-style:normal;letter-spacing:.06em;color:var(--cha)}
+.mini-passos b{font:600 20px/1.2 'Inter';color:var(--creme)}
+.mini-passos span{font-size:16px;line-height:1.4;color:var(--creme);opacity:.7}
+@media (max-width:480px){.mini-passos{gap:12px}.mini-passos li{padding:16px}.mini-passos b{font-size:17px}.mini-passos span{font-size:14px}}
 .form{background:#1D2440;border:1px solid rgba(245,242,233,.14);border-radius:28px;padding:36px;display:flex;flex-direction:column;gap:18px}
 .form label{display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:500;opacity:.95}
 .form input,.form select{font:400 16px 'Inter',sans-serif;color:var(--creme);background:rgba(255,255,255,.06);border:1px solid rgba(245,242,233,.22);border-radius:14px;padding:15px 16px;min-height:52px}
@@ -291,6 +294,7 @@ details p{padding:0 56px 26px 0;font-size:18px;opacity:.8;max-width:680px}
 /* texto justificado, como no Figma */
 .lead,.painel p,.nota,.lista p,details p{text-align:justify}
 .pc__desc{text-align:left;hyphens:none}
+.sec--cha .lead,.passos p{text-align:left}
 /* dor: imagens novas */
 .painel{gap:28px}.painel--azul{justify-content:center}
 .painel h3{font-size:30px;line-height:1.15;font-weight:600;letter-spacing:-.01em}
