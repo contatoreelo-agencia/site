@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="pt-BR" class="is-loading">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ironik: manual vivo</title>
+<meta name="description" content="O manual de identidade da Ironik como um site vivo: o Nik, o rabo, a voz e as regras, contados pela rolagem.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://reeloagencia.com/identidade/ironik/">
+<link rel="icon" href="data:,">
+<link rel="preload" href="assets/fonts/ArchivoBlack-400.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Archivo Black";src:url(assets/fonts/ArchivoBlack-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Archivo";src:url(assets/fonts/Archivo-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Archivo";src:url(assets/fonts/Archivo-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Space Mono";src:url(assets/fonts/SpaceMono-700.woff2) format("woff2");font-weight:700;font-display:swap}
+:root{--k:#111111;--c:#E9E6DF;--p:#FF2E7E;--g:#BDBDBD;--pad:clamp(20px,5vw,72px);
+  --ease-out:cubic-bezier(.16,1,.3,1);--ease-io:cubic-bezier(.76,0,.24,1);--ease-snap:cubic-bezier(.34,1.36,.64,1);
+  --dur-s:.32s;--dur-m:.64s;--dur-l:1s;
+  --disp:"Archivo Black","Archivo",system-ui,sans-serif;--txt:"Archivo",system-ui,sans-serif;--mono:"Space Mono",ui-monospace,Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--k);-webkit-text-size-adjust:100%}
+body{font:400 18px/1.5 var(--txt);color:var(--c);background:var(--k);-webkit-font-smoothing:antialiased}
+.is-loading body{overflow:hidden}
+main{overflow-x:clip}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+:focus-visible{outline:3px solid var(--p);outline-offset:3px;border-radius:6px}
+.mono{font:700 12px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+.h1,.h2{font-family:var(--disp);font-weight:400;letter-spacing:-.03em;line-height:.94}
+.h1{font-size:clamp(54px,9.6vw,148px)}
+.h2{font-size:clamp(40px,6vw,92px)}
+.lead{font-size:clamp(17px,1.5vw,21px);line-height:1.55}
+.pk{color:var(--p)}
+.w{display:inline-block;white-space:nowrap}
+.ch{display:inline-block;will-change:transform}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:11px 20px;border-radius:999px;background:var(--p);color:var(--k);font:700 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.pill.k{background:var(--k);color:var(--c)}.pill.c{background:var(--c);color:var(--k)}
+.kick{opacity:.7;margin-bottom:18px}
+
+/* loader */
+#loader{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--k)}
+#loaderLogo{width:min(420px,70vw);overflow:visible}
+#loaderLogo .lp{fill:var(--c);fill-opacity:0;stroke:var(--c);stroke-width:2.4}
+#loaderMeta{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(24px,6vh,56px);display:flex;align-items:center;gap:18px}
+#loaderBar{flex:1;height:3px;background:var(--p);transform-origin:0 50%;transform:scaleX(0)}
+#loaderCount{color:var(--p)}
+
+/* nav, progresso, contador */
+.nav{position:fixed;top:max(14px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:4px;padding:6px 6px 6px 18px;border-radius:999px;background:rgba(27,27,27,.86);box-shadow:inset 0 0 0 1px rgba(233,230,223,.14);max-width:calc(100vw - 20px);overflow-x:auto;scrollbar-width:none}
+.nav .lg{font:400 17px var(--disp);letter-spacing:-.02em;text-decoration:none;margin-right:10px}
+.nav a.l{padding:9px 12px;border-radius:999px;font:600 13px var(--txt);text-decoration:none;opacity:.62;white-space:nowrap;transition:opacity var(--dur-s),background var(--dur-s)}
+.nav a.l.on{opacity:1;background:rgba(233,230,223,.12)}
+.nav .back{font:700 11px var(--mono);letter-spacing:.1em;text-decoration:none;opacity:.6;text-transform:uppercase;white-space:nowrap;margin-right:12px}
+@media(max-width:900px){.nav a.l{display:none}}
+#prog{position:fixed;left:0;right:0;top:0;height:3px;background:var(--p);transform-origin:0 50%;transform:scaleX(0);z-index:60;pointer-events:none}
+#reps{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));z-index:45;background:var(--k);color:var(--c);padding:9px 14px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(233,230,223,.22);pointer-events:none}
+#toast{position:fixed;left:50%;bottom:70px;transform:translate(-50%,20px);opacity:0;z-index:80;pointer-events:none}
+
+/* seções */
+.sec{position:relative;min-height:100svh;padding:clamp(110px,16vh,150px) var(--pad) clamp(90px,13vh,130px)}
+.k{background:var(--k);color:var(--c)}.c{background:var(--c);color:var(--k)}.p{background:var(--p);color:var(--k)}
+.cover{border-radius:var(--r,0px) var(--r,0px) 0 0}
+.wrap{position:relative;transform-origin:50% 100%}
+.shade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:8}
+.scene{padding:0;height:var(--h,400svh)}
+.scene>.st{position:sticky;top:0;height:100svh;overflow:hidden;padding:clamp(96px,14vh,124px) var(--pad) clamp(80px,11vh,100px)}
+.chap{position:absolute;left:var(--pad);top:clamp(22px,4vh,40px);opacity:.7;z-index:6}
+@media(max-width:1180px){.chap{display:none}}
+.mq{position:absolute;left:0;right:0;bottom:0;height:58px;background:var(--p);color:var(--k);overflow:hidden;z-index:3;display:flex;align-items:center}
+.mt{display:flex;white-space:nowrap;animation:mq 46s linear infinite;will-change:transform}
+.mt span{font:400 22px var(--disp);letter-spacing:-.02em;padding-right:34px}
+@keyframes mq{to{transform:translateX(-50%)}}
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;padding:20px 34px;border-radius:999px;background:var(--p);color:var(--k);overflow:hidden;text-decoration:none;font:700 14px var(--mono);letter-spacing:.12em;text-transform:uppercase;isolation:isolate}
+.btn .fill{position:absolute;width:0;height:0;border-radius:50%;background:var(--c);transform:translate(-50%,-50%);z-index:-1;pointer-events:none}
+
+/* 01 capa */
+#capa{display:grid;grid-template-columns:minmax(0,min(860px,54vw)) minmax(0,1fr);column-gap:clamp(24px,4vw,72px);align-items:center;overflow:hidden;padding-bottom:clamp(120px,17vh,160px)}
+#capa .wrap{grid-column:1;grid-row:1;max-width:none;margin:0;z-index:2}
+#capa .h1{font-size:clamp(54px,7.3vw,140px)}
+#capa .eb{color:var(--p);margin-bottom:26px}
+#capa .sub{font-size:clamp(18px,1.7vw,24px);max-width:30em;margin:30px 0 0;opacity:.88}
+#nkw{position:relative;grid-column:2;grid-row:1;justify-self:center;width:min(100%,740px,88vh);z-index:1}
+#nik{display:block;width:100%;position:relative}
+#nik .pw{position:relative;display:block}
+#nik img{width:100%;height:auto}
+#nik .react{position:absolute;top:-16%;right:-2%;width:27%;opacity:0;pointer-events:none}
+#nik .bal{position:absolute;top:-8%;left:6%;opacity:0;pointer-events:none}
+@media(max-width:900px){#capa{grid-template-columns:1fr;align-content:center;row-gap:28px}#capa .wrap{grid-column:1;grid-row:1}#nkw{grid-column:1;grid-row:2;width:min(78vw,420px)}}
+
+/* 02 ideia */
+#ideia .big{font:400 clamp(24px,2.9vw,44px)/1.14 var(--disp);letter-spacing:-.02em;max-width:22em}
+#ideia .big .w{opacity:.16}
+#camp{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,40px);margin-top:clamp(36px,6vh,64px)}
+#camp li{border-top:2px solid var(--k);padding-top:12px}
+#camp .mono{display:block;opacity:.6;margin-bottom:6px}
+#camp b{font:400 clamp(18px,1.8vw,26px)/1.1 var(--disp);letter-spacing:-.02em}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,40px);margin-top:clamp(36px,6vh,64px)}
+.nums b{display:block;font:400 clamp(56px,8vw,128px)/.9 var(--disp);letter-spacing:-.04em;color:var(--p)}
+@media(max-width:900px){#camp,.nums{grid-template-columns:1fr}}
+
+/* 03 logo (cena) */
+#logo .st{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:clamp(24px,4vw,64px);align-items:center}
+#logo .steps{margin-top:22px}
+#logo .steps li{opacity:.25;margin:12px 0;font:400 clamp(22px,2.3vw,34px)/1.1 var(--disp);letter-spacing:-.02em;transition:opacity var(--dur-m) var(--ease-out),translate var(--dur-m) var(--ease-out)}
+#logo .steps li.on{opacity:1;translate:12px 0;color:var(--p)}
+#lstage{position:relative;overflow:hidden;border-radius:24px;padding-bottom:26px}
+#lcam{position:relative;transform-origin:41.1% 50%}
+#lcam img{display:block;width:100%;height:auto;aspect-ratio:2/1}
+#ring{position:absolute;left:25.6%;top:19%;width:31%;aspect-ratio:1;overflow:visible}
+#ring circle{fill:none;stroke:var(--p);stroke-width:3}
+#opill{position:absolute;left:26%;top:4%;opacity:0}
+#chips{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
+#chips .chip{background:#1B1B1B;border-radius:16px;height:clamp(78px,11vh,118px);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(233,230,223,.16)}
+#chips .chw{opacity:0}
+#chips .chip img{height:56%;width:auto;max-width:80%;object-fit:contain}
+#chips .chip.q img{height:72%}
+#chips .cl{margin-top:6px;opacity:.7;font-size:10px}
+@media(max-width:900px){#logo .st{grid-template-columns:1fr;align-content:center;gap:8px}#logo .steps li{font-size:20px;margin:6px 0}}
+
+/* 04 travessia */
+#trav .st{padding:0;perspective:1400px}
+#trav .t1{position:absolute;left:var(--pad);top:22vh;max-width:8em;z-index:2}
+#trav .t2{position:absolute;right:var(--pad);bottom:16vh;max-width:min(20em,26vw);text-align:right;opacity:.8;z-index:2}
+#travBg{position:absolute;left:50%;top:52%;translate:-50% -50%;font:400 clamp(260px,40vw,700px)/.8 var(--disp);letter-spacing:-.05em;color:var(--k);opacity:.05;pointer-events:none;white-space:nowrap;z-index:1}
+#travObj{position:absolute;left:50%;top:50%;height:min(80vh,780px);aspect-ratio:994/1536;translate:-50% -50%;transform-style:preserve-3d;z-index:4;filter:drop-shadow(0 30px 30px rgba(17,17,17,.25))}
+#travObj img{width:100%;height:100%}
+#travPanel{position:absolute;inset:0;background:var(--p);color:var(--k);clip-path:inset(0 0 0 100%);display:grid;align-content:center;padding:0 var(--pad);z-index:3}
+
+/* 05 nik em poses */
+#nikp{height:calc(100svh + 12 * 36svh)}
+#nikp .stick{position:sticky;top:0;height:100svh;overflow:hidden}
+#nikp .bgw{position:absolute;left:-2vw;bottom:-7vh;font:400 clamp(220px,36vw,560px)/1 var(--disp);letter-spacing:-.04em;color:var(--c);opacity:.28;pointer-events:none;white-space:nowrap}
+#nikp .lcol{position:absolute;left:var(--pad);top:clamp(96px,13vh,124px);width:min(44vw,640px);z-index:2}
+#nikp .lead{margin-top:20px;max-width:22em}
+#nikp .cnt{display:block;margin-top:16px;font:400 clamp(70px,9vw,140px)/1 var(--disp);letter-spacing:-.04em}
+#nikp .cnt small{font-size:.28em;opacity:.55;letter-spacing:0}
+#nikp .pose{position:absolute;left:64%;top:52%;width:min(84vh,54vw,820px);aspect-ratio:1;transform:translate(-50%,-50%)}
+#nikp .pp{position:absolute;inset:0}
+#nikp .pp img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0}
+#nikp .pp img.on{opacity:1}
+#nikp .trail{position:absolute;left:var(--pad);bottom:clamp(40px,7vh,72px);display:flex;gap:clamp(12px,1.4vw,24px)}
+#nikp .trail img{width:clamp(100px,11vw,180px);opacity:0;transition:opacity .2s}
+#nikp .ticks{position:absolute;right:var(--pad);top:50%;transform:translateY(-50%);display:grid;gap:10px}
+#nikp .ticks i{display:block;width:46px;height:6px;border-radius:3px;background:var(--k);opacity:.22;transition:opacity .15s}
+#nikp .ticks i.on{opacity:1}
+@media(max-width:900px){#nikp .pose{left:50%;top:60%;width:90vw}#nikp .trail,#nikp .lead,#nikp .cnt{display:none}#nikp .ticks{right:12px}#nikp .ticks i{width:22px}#nikp .lcol{top:96px;width:80vw}}
+
+/* 06 voz */
+#voz .st{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(30px,5vw,80px);align-items:center}
+#voz h2{font-size:clamp(36px,4.6vw,68px);max-width:9em}
+#voz .tg{display:flex;gap:10px;margin-top:32px}
+#voz .tg button{padding:11px 22px;border-radius:999px;font:700 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;box-shadow:inset 0 0 0 1.5px var(--k);transition:background .3s,color .3s}
+#voz .tg button[aria-pressed=true]{background:var(--k);color:var(--c)}
+#voz .reg{margin-top:22px;max-width:28em;min-height:6.5em}
+#voz .panel{position:relative;background:var(--k);color:var(--c);border-radius:32px;height:min(62vh,540px);min-height:380px}
+#chat,#nao{position:absolute;inset:clamp(22px,2.6vw,38px);display:flex;flex-direction:column;justify-content:center;gap:16px}
+#nao{opacity:0;gap:clamp(12px,2.2vh,22px)}
+#voz .fl{display:grid;grid-template-columns:60px 1fr;gap:14px;align-items:center}
+#voz .fl img{width:60px;height:60px}
+#voz .bb{padding:20px 24px;border-radius:28px;font:600 clamp(16px,1.4vw,20px)/1.3 var(--txt);background:var(--p);color:var(--k)}
+#voz .fl.d .bb{background:var(--c)}
+#voz .dots{display:flex;gap:7px;padding:20px 24px;border-radius:28px;background:var(--c);width:max-content}
+#voz .dots i{width:11px;height:11px;border-radius:50%;background:var(--k);animation:pt 1.2s infinite ease-in-out}
+#voz .dots i:nth-child(2){animation-delay:.18s}#voz .dots i:nth-child(3){animation-delay:.36s}
+@keyframes pt{0%,100%{opacity:.3}50%{opacity:1}}
+#nao .no{display:block;white-space:nowrap;font:400 clamp(18px,1.9vw,28px)/1.1 var(--disp);letter-spacing:-.02em;position:relative;width:max-content;max-width:100%}
+#nao .no i{position:absolute;left:-2%;right:-2%;top:54%;height:5px;background:var(--p);border-radius:3px;transform-origin:0 50%;transform:scaleX(0)}
+#nao .mono{color:var(--p)}
+@media(max-width:900px){#voz .st{grid-template-columns:1fr;align-content:center;gap:20px}#voz .panel{height:auto;min-height:0}#chat{position:relative;inset:auto;padding:22px}#voz .reg{min-height:0}}
+
+/* 07 cores */
+#cores .st{display:flex;flex-direction:column;gap:clamp(14px,2.6vh,26px);justify-content:center}
+#cores .rabo{height:clamp(56px,8vh,84px);border-radius:20px;overflow:hidden;position:relative;transform-origin:0 50%}
+#cores .rabo i{position:absolute;top:0;bottom:0;left:-300px;right:-600px;background:repeating-linear-gradient(115deg,var(--p) 0 52px,var(--k) 52px 104px);will-change:transform}
+#sw{display:flex;gap:clamp(10px,1.4vw,18px);height:clamp(240px,44vh,440px)}
+#sw .c1{position:relative;flex:1 1 0;min-width:0;border-radius:22px;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;text-align:left;overflow:hidden;transition:flex-grow var(--dur-m) var(--ease-io)}
+#sw .c1.on{flex-grow:3.4}
+#sw .c1 b{font:400 clamp(22px,2.4vw,34px) var(--disp);letter-spacing:-.02em;white-space:nowrap}
+#sw .c1 .info{display:block;max-height:0;overflow:hidden;opacity:0;transition:opacity var(--dur-s),max-height var(--dur-m) var(--ease-io)}
+#sw .c1.on .info{opacity:1;max-height:140px;transition-delay:.15s}
+#sw .c1 .rl{font-size:15px;opacity:.8;max-width:22em}
+#sw .c1 .cp{position:absolute;right:18px;top:18px;opacity:.7}
+#cores .ct{display:flex;flex-wrap:wrap;gap:12px}
+@media(max-width:900px){#cores .ct .pill{white-space:normal;line-height:1.4}}
+@media(max-width:900px){#sw{flex-direction:column;height:auto}#sw .c1{min-height:84px}#sw .c1.on{min-height:200px}}
+
+/* 08 tipografia */
+#tipo{--ls:6}
+#tipo .st{display:flex;flex-direction:column;justify-content:center}
+#tipo .big{display:block;font:400 clamp(54px,11.4vw,172px)/1 var(--disp);letter-spacing:calc(var(--ls) * .01em);margin-top:clamp(14px,3vh,32px);white-space:nowrap;width:100%;border:0;background:none;color:inherit;outline:0}
+#tipo .sl{display:flex;align-items:center;gap:22px;margin-top:clamp(18px,3.5vh,40px);flex-wrap:wrap}
+#tipo input[type=range]{flex:1 1 280px;max-width:640px;accent-color:var(--p);height:30px}
+#tipo .lb{padding:9px 14px;border-radius:999px;transition:background .3s,color .3s}
+#tipo .lb.ok{background:var(--k);color:var(--p)}
+#tipo .lb.no{box-shadow:inset 0 0 0 1.5px var(--k)}
+#esp{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,48px);margin-top:clamp(26px,5vh,54px)}
+#esp>div{border-top:2px solid var(--k);padding-top:12px}
+#esp small{display:block;margin-bottom:8px;opacity:.6}
+#esp .t1{font:400 clamp(24px,2.6vw,36px) var(--disp);letter-spacing:-.03em}
+#esp .t3{font:700 14px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+@media(max-width:900px){#esp{grid-template-columns:1fr}}
+
+/* 09 vista */
+#vista .st{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,64px);align-items:center}
+#vista .stp{margin-top:clamp(24px,4vh,40px)}
+#vista .opt{margin-top:clamp(16px,2.6vh,26px);display:flex;align-items:center;gap:clamp(18px,2vw,32px)}
+#vista .opt p{opacity:.7;min-width:84px}
+#vista .cr{display:flex;gap:14px}
+#vista .cr button{width:52px;height:52px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--k)}
+#vista .cr button[aria-pressed=true]{box-shadow:inset 0 0 0 1.5px var(--k),0 0 0 4px var(--p),0 0 0 7px var(--k)}
+#vista .cr .kk{background:var(--k)}#vista .cr .cc{background:var(--c)}
+#vista .es{display:flex;gap:12px}
+#vista .es button{width:clamp(76px,7.4vw,118px);aspect-ratio:3/4;border-radius:14px;background:var(--k);display:grid;place-items:center;transition:translate .35s var(--ease-out)}
+#vista .es button.cremev{background:var(--c)}
+#vista .es button img{width:82%}
+#vista .es button[aria-pressed=true]{box-shadow:0 0 0 4px var(--k);translate:0 -6px}
+#vst{position:relative;width:min(740px,86%,calc((100svh - 150px) * .933));margin:0 auto;aspect-ratio:560/600;--tee:#111}
+#vst .tee{position:absolute;inset:0;width:100%;height:100%}
+#vst .tee path{fill:var(--tee);transition:fill .4s var(--ease-out);stroke:rgba(17,17,17,.3);stroke-width:2}
+#art{position:absolute;left:27.5%;top:21.6%;width:44.6%}
+#tray{position:absolute;right:-17%;top:30%;display:grid;gap:16px;padding:14px 10px;width:84px;justify-items:center;z-index:3;isolation:isolate}
+#tray::before{content:"";position:absolute;inset:0;border-radius:22px;background:var(--k);opacity:var(--tb,1);z-index:-1}
+.dr{touch-action:none;cursor:grab;position:relative;z-index:4;user-select:none}
+.dr img{pointer-events:none}
+@media(max-width:900px){#vista .st{grid-template-columns:1fr;align-content:center;gap:16px}#vst{width:min(380px,90vw)}#tray{right:2%;top:4%}#vista .opt{display:none}}
+
+/* 10 aplicações */
+#apps{padding:0}
+#apps .stick{height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(16px,3vh,28px)}
+#apps .head{display:flex;justify-content:space-between;align-items:end;gap:20px;padding:0 var(--pad)}
+#apps h2{font-size:clamp(34px,4.6vw,70px)}
+#acnt{font:400 clamp(34px,4.6vw,70px)/1 var(--disp);color:var(--p);letter-spacing:-.03em}
+#acnt small{font-size:.4em;color:var(--c);opacity:.5}
+#trk{display:flex;gap:clamp(14px,2vw,28px);padding:0 var(--pad);width:max-content;will-change:transform}
+#trk .cd{position:relative;flex:0 0 auto;width:min(58vw,800px,calc((100svh - 300px) * 1.5));aspect-ratio:3/2;border-radius:24px;overflow:hidden;background:#1B1B1B}
+#trk .cd img{position:absolute;inset:0 -6%;width:112%;height:100%;object-fit:cover;max-width:none}
+#trk .cd .pill{position:absolute;left:18px;bottom:18px;z-index:2}
+#trk .cd .no{position:absolute;right:20px;top:16px;z-index:2;color:var(--c);text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.apb{margin:0 var(--pad);height:3px;background:rgba(233,230,223,.18);border-radius:2px;overflow:hidden}
+.apb i{display:block;height:100%;background:var(--p);transform-origin:0 50%;transform:scaleX(0)}
+@media(max-width:900px){#apps .stick{height:auto;padding:100px 0 70px}#trk{width:auto;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}#trk .cd{width:84vw;scroll-snap-align:center}.apb{display:none}}
+
+/* 11 figurinhas */
+#fig .top{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+#fig .loop{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;height:78svh;overflow:hidden;margin-top:30px;border-radius:28px;background:var(--p);padding:0 14px}
+#fig .col{overflow:hidden}
+#fig .inner{display:grid;gap:14px}
+#fig .inner img{width:100%;aspect-ratio:1;object-fit:contain}
+@media(max-width:900px){#fig .loop{grid-template-columns:repeat(3,1fr)}#fig .col:nth-child(n+4){display:none}}
+
+/* 12 fecho */
+#fecho{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:1fr auto auto;column-gap:clamp(24px,4vw,72px);align-items:center;overflow:hidden;padding-top:clamp(96px,12vh,120px);padding-bottom:0}
+#fecho .in{grid-column:1;grid-row:1;position:relative;z-index:2}
+#fecho .h1{font-size:clamp(44px,5.4vw,96px)}
+#fecho #cta{padding:26px 46px;font-size:16px}
+#fecho .sb{margin:24px 0 40px;font-size:clamp(18px,1.7vw,24px);opacity:.85}
+#fecho .lk{display:inline-block;margin-left:22px;opacity:.7;text-decoration:none}
+#fecho .vis{position:relative;grid-column:2;grid-row:1;justify-self:end;width:min(100%,460px,31svh);aspect-ratio:2/3}
+#fecho .vis .a,#fecho .vis .b{position:absolute;inset:0;transition:opacity .45s,transform .7s var(--ease-out)}
+#fecho .vis .a{display:grid;place-items:center}#fecho .vis .a img{width:86%}
+#fecho .vis .b{opacity:0;transform:translateY(46px);border-radius:28px;overflow:hidden;background:var(--c)}
+#fecho .vis .b img{width:100%;height:100%;object-fit:cover}
+#fecho .vis .b .pill{position:absolute;left:14px;bottom:14px}
+#fecho.hv .vis .a{opacity:0;transform:translateY(-20px)}#fecho.hv .vis .b{opacity:1;transform:none}
+.giant{grid-column:1/-1;grid-row:2;width:100%;margin:clamp(8px,2vh,24px) 0 clamp(12px,2vh,24px);overflow:hidden}
+.giant canvas{display:block;width:100%;aspect-ratio:1000/142;height:auto}
+#fecho .ft{grid-column:1/-1;grid-row:3;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0 22px;border-top:1px solid color-mix(in srgb,var(--c) 22%,transparent);font-size:12px;opacity:.85}
+#fecho .ft a{margin-right:110px;color:var(--p);text-decoration:none;letter-spacing:.08em}
+@media(max-width:900px){#fecho{grid-template-columns:1fr}#fecho .in{max-width:100%}#fecho .vis{display:none}#fecho .lk{display:block;margin:20px 0 0}}
+
+/* movimento reduzido */
+@media (prefers-reduced-motion: reduce){
+  .scene,#nikp{height:auto}
+  .scene>.st,#nikp .stick{position:relative;height:auto;min-height:100svh}
+  #ideia .big .w{opacity:1}#nikp .pp img:first-child{opacity:1}
+  #chips .chw,#opill{opacity:1}#travPanel{position:relative;clip-path:none;min-height:60svh}
+  #nao{position:relative;inset:auto;opacity:1;margin-top:20px}#nao .no i{transform:none}
+  #chat{position:relative;inset:auto}#voz .panel{height:auto;padding:24px}
+  .mt{animation:none}
+}
+</style>
+</head>
+<body>
+<div id="prog" aria-hidden="true"></div>
+<div id="loader" role="status" aria-label="Carregando">
+  <svg id="loaderLogo" viewBox="0 0 897.333 673" aria-hidden="true">
+<g id="contorno">
+<path class="lp" d="M496.078 441.526C528.983 439.531 561.994 439.954 594.838 442.791C603.885 443.633 634.608 448.256 640.414 455.803C643.363 459.637 642.552 464.358 642 468.774C637.448 472.582 636.046 474.865 632.081 479.185C630.534 480.871 626.301 480.504 623.927 480.39C614.866 479.951 605.721 477.665 596.691 476.587C585.102 475.202 572.773 474.514 561.1 474.168C556.758 474.47 546.61 473.484 543.775 474.584C558.62 476.564 570.196 487.068 547.505 490.595C511.208 496.229 474.85 505.321 441.038 519.574C431.29 523.662 421.663 528.03 412.171 532.679C405.652 535.829 399.024 539.663 392.151 541.902C387.999 543.252 384.798 543.295 380.858 541.271C376.822 539.199 372.628 535.882 371.29 531.355C370.319 528.074 370.743 524.98 372.411 522.027C380.653 507.433 435.675 486.76 452.933 481.362C467.024 476.959 481.339 473.844 495.553 469.932C480.555 469.537 466.236 471.312 451.448 473.362C404.691 479.843 358.908 492.049 315.128 509.702C302.186 515.153 289.541 521.278 277.243 528.061C270.565 531.715 263.805 536.119 256.938 539.265C250.586 542.174 246.148 542.16 242.182 536.144C240.136 535.601 238.323 534.909 236.339 534.182C229.957 524.345 232.671 518.706 241.742 511.718C259.616 497.938 282.385 487.396 303.522 479.522C351.556 461.637 402.147 450.224 453.039 444.477C467.471 442.861 481.654 442.297 496.078 441.526Z" fill="#E9E6DF"/>
+<path class="lp" d="M170.598 294.651C180.547 293.29 188.3 299.957 190.278 309.657C192.111 318.643 191.84 329.309 192.624 338.56L198.244 398.729C200.319 419.187 203.146 440.42 205.682 460.866C207.095 472.253 207.793 471.312 199.814 480.477C195.512 485.42 196.129 490.91 186.613 490.283C181.276 488.425 172.241 480.898 170.547 475.377C169.163 470.864 169.161 463.771 168.625 458.79L163.897 414.727C162.859 404.117 160.763 392.658 159.904 382.282C158.628 365.276 156.33 348.18 153.482 331.354C152.271 324.199 146.047 319.222 152.298 310.759C157.946 303.11 160.603 296.862 170.598 294.651Z" fill="#E9E6DF"/>
+<path class="lp" fill-rule="evenodd" clip-rule="evenodd" d="M507.863 285.496C509.353 285.305 510.83 285.176 512.333 285.273C517.038 285.579 522.191 288.102 525.275 291.67C526.739 293.365 527.238 295.283 527.707 297.421C528.868 302.724 528.956 308.319 529.889 313.689C531.646 323.805 533.132 333.945 534.841 344.06C536.015 350.982 537.496 357.898 538.407 364.857C539.191 370.858 539.493 376.965 540.115 382.995C540.974 391.324 543.055 403.59 542.263 411.644C542.105 413.231 541.526 413.824 540.317 414.802C534.499 419.509 525.411 426.154 517.573 425.196C500.052 423.054 479.204 383.617 468.614 370.16C468.303 377.507 468.198 384.861 468.299 392.214C468.408 398.625 468.351 405.379 468.618 411.745C469.161 424.629 454.912 438.086 443.187 427.242C440.804 425.017 439.061 422.19 438.14 419.059C436.029 411.593 437.273 378.947 436.808 368.663C432.042 391.428 419.084 411.652 400.395 425.496C384.69 437.061 364.71 441.899 348.8 428.061C347.919 427.295 346.212 425.415 345.213 425.263C344.917 429.647 338.121 440.339 333.124 441.426C332.603 441.538 328.251 440.686 327.582 440.453C305.547 432.788 283.666 424.671 261.131 418.627C261.688 422.795 264.58 452.868 264.089 454.769C263.636 456.515 253.375 468.077 251.348 469.301C247.147 471.838 242.15 470.602 237.695 469.599C235.168 467.263 232.038 464.617 230.674 461.396C228.584 456.466 225.078 422.273 224.715 415.022C224.408 414.933 224.102 414.841 223.798 414.746C206.677 409.429 208.889 391.256 224.063 383.838C223.71 379.125 223.124 352.291 222.044 350.046L220.942 350.011C210.345 352.738 208.649 351.977 201.262 343.898C199.269 341.719 198.71 338.887 199.246 336.115C201.563 324.081 212.143 320.677 221.945 316.346C238.588 308.99 255.412 303.182 273.286 299.794C283.883 297.785 293.107 296.016 303.964 297.034C328.804 299.404 349.261 317.219 332.191 341.936C317.753 362.843 299.017 373.615 279.955 388.807C293.711 391.66 323.411 401.992 335.595 408.703C327.561 390.013 332.218 365.766 340.598 347.93C347.254 333.761 360.346 313.619 375.602 307.989C382.965 305.273 402.122 308.272 409.035 312.205C422.634 319.426 430.273 330.37 435.182 344.717C436.247 347.83 436.064 351.691 437.466 355.505L437.637 355.962C438.171 347.313 438.144 338.505 438.433 329.887C438.806 318.955 436.826 308.688 447.166 301.826C455.994 295.965 459.834 294.916 466.914 304.055C472.491 311.25 476.575 319.085 481.359 326.792C489.745 340.42 497.703 354.53 506.566 367.867C506.365 362.846 506.119 357.848 505.458 352.862C503.92 341.305 497.689 308.721 499.687 299.196C500.792 293.954 503.267 288.501 507.863 285.496ZM400.281 345.876C397.693 341.263 394.019 336.246 388.035 336.993C376.062 344.236 369.3 357.76 365.479 370.848C362.418 381.338 361.214 408.458 379.001 404.353C395.957 396.396 409.814 362.865 400.281 345.876ZM301.618 329.067C298.042 328.726 295.152 328.602 291.55 328.895C281.155 329.857 264.63 334.5 254.69 337.935C255.381 348.028 256.628 358.01 257.314 368.259C258.947 367.121 260.843 365.857 262.392 364.644C272.377 356.535 293.961 338.977 301.618 329.067Z" fill="#E9E6DF"/>
+<path class="lp" d="M705.037 263.617C716.56 262.311 723.229 264.952 725.096 277.355C733.6 283.728 731.462 290.169 724.648 296.721C706.434 314.241 685.649 328.89 665.538 344.113C661.695 347.023 657.686 350.176 653.55 352.627C658.934 355.162 664.639 358.732 669.919 361.72C678.301 366.434 686.718 371.085 695.17 375.672C704.8 380.92 714.461 386.1 724.162 391.211C730.173 394.398 736.325 397.529 742.175 400.987C743.954 402.039 744.69 402.791 745.746 404.532C747.643 407.668 749.049 411.448 747.836 415.139C746.298 419.812 743.353 421.62 739.336 423.758C734.486 432.317 730.178 434.861 720.311 431.173C711.106 427.731 702.009 422.619 693.268 418.077C674.336 408.359 655.736 398.015 637.487 387.063L629.894 382.443C630.17 390.633 630.266 399.147 631.015 407.849C631.839 417.424 625.666 431.055 615.233 432.312C609.765 432.204 599.798 425.682 598.882 420.323C596.411 405.783 596.117 388.772 595.925 374.087C595.013 373.495 594.141 372.848 593.308 372.149C583.866 364.367 589.461 356.935 595.587 349.847C595.403 343.897 595.262 337.944 595.175 331.992L594.711 300.52C594.579 288.627 592.617 274.155 605.494 267.694C616.789 261.848 628.501 270.171 630.284 282.02C631.261 288.514 630.582 295.36 630.31 301.954C629.855 311.371 629.517 320.792 629.294 330.217C642.346 320.666 657.025 305.361 669.328 294.411C677.925 286.756 694.973 268.009 705.037 263.617Z" fill="#E9E6DF"/>
+<path class="lp" d="M562.59 294.628C564.364 294.415 566.319 294.298 568.089 294.601C583.695 297.266 583.292 309.323 583.135 322.23C583.06 328.501 583.078 335.352 583.126 341.643C583.209 350.115 583.415 358.585 583.744 367.052C584.217 380.595 585.247 393.986 585.698 407.499C585.773 409.804 585.776 412.206 584.576 414.183C580.917 420.198 578.249 423.804 571.44 425.775C565.363 426.296 557.03 423.127 555.141 416.852C552.775 408.248 552.547 398.878 552.048 389.929C550.707 364.871 549.007 339.738 548.056 314.681C547.667 304.485 553.227 297.577 562.59 294.628Z" fill="#E9E6DF"/>
+<path class="lp" d="M565.451 243.844C592.669 241.788 588.603 286.619 561.061 290.512C532.424 290.789 536.305 249.129 565.451 243.844Z" fill="#E9E6DF"/>
+<path class="lp" fill-rule="evenodd" clip-rule="evenodd" d="M398.295 130.163C400.64 130.016 402.198 130.159 404.382 131.033C406.964 132.083 409.227 133.79 410.945 135.984C412.901 138.501 421.582 154.465 423.138 157.674C428.428 168.585 437.262 182.836 441.793 193.639C455.205 177.633 470.036 162.633 484.902 148.01C492.605 140.242 498.958 135.189 508.247 144.833C513.793 150.591 508.909 162.472 507.371 169.733L499.896 206.443C497.85 216.425 495.756 221.785 495.379 232.225C510.805 236.908 507.099 243.359 499.453 252.894C482.79 254.838 466.167 257.072 449.583 259.595C437.897 261.476 426.536 263.734 414.65 265.558C396.699 269.318 378.712 273.186 361.013 277.983C353.264 280.083 345.372 282.658 337.574 284.411C334.548 283.759 331.073 282.427 329.023 280.02C327.709 278.503 327.12 276.488 327.411 274.502C328.003 270.316 330.998 268.288 333.997 265.88L333.895 265.555C331.733 258.826 328.365 251.82 325.468 245.297C319.847 232.738 314.099 220.236 308.224 207.794C304.486 199.771 295.283 185.738 301.264 177.818C309.218 167.288 318.073 173.158 326.552 179.01C340.689 188.767 356.532 198.345 369.527 209.488C372.249 194.523 376.515 178.84 380.484 164.055C382.821 155.348 384.564 145.136 388.419 136.738C389.992 133.312 394.712 131.146 398.295 130.163ZM404.416 181.543C401.468 195.573 396.492 209.51 393.339 223.464C391.657 230.903 385.604 242.523 376.004 238.981C362.557 234.02 350.419 220.795 337.614 214.034C341.442 223.691 352.21 250.275 352.806 259.424C356.552 258.441 360.26 257.378 363.922 256.12C379.05 250.922 394.562 247.671 410.006 243.672C428.872 239.658 451.8 235.647 470.951 234.735C469.79 228.141 476.468 194.619 478.159 186.814C471.215 194.018 464.577 201.865 457.79 209.228C452.957 214.474 446.726 222.512 440.859 226.28C437.061 226.544 434.011 227.216 431.082 224.717C424.615 219.199 408.322 184.22 404.416 181.543Z" fill="#E9E6DF"/>
+</g>
+</svg>
+  <div id="loaderMeta"><span class="mono" id="loaderCount">REP 00</span><i id="loaderBar"></i><span class="mono">Carregando… só mais uma.</span></div>
+</div>
+<nav class="nav" aria-label="Capítulos"><a class="back" href="/#projetos">← Reelô</a><a class="lg" href="#capa">ironik</a><a class="l" href="#ideia" data-s="ideia">Ideia</a><a class="l" href="#logo" data-s="logo">Logo</a><a class="l" href="#nikp" data-s="nikp">Nik</a><a class="l" href="#voz" data-s="voz">Voz</a><a class="l" href="#cores" data-s="cores">Cores</a><a class="l" href="#apps" data-s="apps">Aplicações</a><a class="pill" href="#fecho" style="margin-left:6px">Falar ↗</a></nav>
+<div id="reps" class="mono" aria-hidden="true">01 / 12</div>
+<div id="toast" class="pill c" role="status" aria-live="polite"></div>
+
+<main id="main">
+<!-- 01 CAPA -->
+<section class="sec k" id="capa" data-n="01">
+  <span class="mono chap">01 · Capa</span>
+  <div class="wrap">
+    <p class="mono eb" data-hero>Manual de identidade · out 2026</p>
+    <h1 class="h1" data-split id="heroTitle">Nunca é <span class="pk">só mais uma.</span></h1>
+    <p class="sub" data-hero>Streetwear para quem leva o estilo a sério. O resto, nem tanto.</p>
+  </div>
+  <div id="nkw" data-own><button id="nik" aria-label="Cutucar o Nik"><span class="pw"><img src="assets/img/nik-cabeca.svg" alt="Nik, o guaxinim da Ironik, de olhar cansado" width="955" height="716" data-critical><img class="react" id="react" src="assets/img/exp05.webp" alt=""><span class="pill c bal mono" id="bal">ei, isso faz cócegas</span></span></button></div>
+  <div class="mq" data-own aria-hidden="true"><div class="mt" data-t="Só mais uma ✦"></div></div>
+</section>
+
+<!-- 02 IDEIA -->
+<section class="sec c cover" id="ideia" data-n="02">
+  <span class="mono chap">02 · A ideia</span>
+  <div class="wrap">
+    <p class="mono kick" data-reveal>A ideia</p>
+    <p class="big" data-read>Só mais uma repetição. Só mais aquela partida de saideira. E, claro, sempre tem espaço para mais uma camiseta de peso no armário. A Ironik Streetwear é para quem leva o próprio estilo a sério, já o resto da vida, nem tanto. Cada peça carrega um código, uma piada interna da rotina que só quem tá no mesmo corre vai entender.</p>
+    <ul id="camp"><li data-reveal><span class="mono">01</span><b>Só mais uma repetição.</b></li><li data-reveal><span class="mono">02</span><b>Só mais uma partida.</b></li><li data-reveal><span class="mono">03</span><b>Só mais uma camiseta.</b></li></ul>
+    <div class="nums"><div data-reveal><b data-count="4">0</b><span class="mono">cores</span></div><div data-reveal><b data-count="4">0</b><span class="mono">versões do logo</span></div><div data-reveal><b data-count="45">0</b><span class="mono">figurinhas do Nik</span></div></div>
+  </div>
+</section>
+
+<!-- 03 LOGO (cena) -->
+<section class="sec k scene" id="logo" data-n="03" style="--h:440svh">
+  <div class="st">
+    <span class="mono chap">03 · Logo</span>
+    <div>
+      <p class="mono kick">O logo</p>
+      <h2 class="h2" data-split>O “O” é o Nik.</h2>
+      <ul class="steps" id="lsteps"><li class="on">Uma palavra</li><li>Um “O” diferente</li><li>O “O” é a cabeça do Nik</li><li>Quatro versões</li></ul>
+    </div>
+    <div id="lstage">
+      <div id="lcam"><img src="assets/img/caixa.svg" alt="Logo Ironik em caixa: o O é a cabeça do guaxinim Nik" width="1200" height="600"><svg id="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg><span class="pill mono" id="opill">a cabeça do Nik é o O</span></div>
+      <div id="chips">
+        <div class="chw"><div class="chip"><img src="assets/img/caixa.svg" alt="" loading="lazy"></div><p class="mono cl">Caixa</p></div>
+        <div class="chw"><div class="chip"><img src="assets/img/empilhado.svg" alt="" loading="lazy"></div><p class="mono cl">Empilhado</p></div>
+        <div class="chw"><div class="chip q"><img src="assets/img/simbolo.svg" alt="" loading="lazy"></div><p class="mono cl">Símbolo</p></div>
+        <div class="chw"><div class="chip"><img src="assets/img/tag-creme.svg" alt="" loading="lazy"></div><p class="mono cl">Tag com coroa</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 TRAVESSIA -->
+<section class="sec c scene" id="trav" data-n="04" style="--h:380svh">
+  <div class="st">
+    <h2 class="h2 t1" id="travT">E quem é o Nik?</h2>
+    <p class="lead t2" id="travP">Um guaxinim de moletom, olhar cansado e rabo listrado. Ele atravessa a marca inteira.</p>
+    <div id="travBg" aria-hidden="true">NIK</div>
+    <div id="travObj" aria-hidden="true"><img src="assets/img/nik-corpo.svg" alt=""></div>
+    <div id="travPanel"><p class="mono kick">O mascote</p><h2 class="h1" style="max-width:7em">Nik, em poses.</h2></div>
+  </div>
+</section>
+
+<!-- 05 NIK EM POSES -->
+<section class="sec p" id="nikp" data-n="05" style="padding:0">
+  <div class="stick">
+    <span class="mono chap">05 · Nik</span>
+    <div class="bgw" id="bgw" aria-hidden="true">NIK</div>
+    <div class="lcol"><h2 class="h2">Uma rotina, doze poses.</h2><p class="lead">Role e ele muda de pose. O rabo é sempre o mesmo, a rotina é que muda.</p><span class="cnt" id="pcnt" aria-hidden="true">01<small>/12</small></span></div>
+    <div class="trail" id="trail" aria-hidden="true"><img alt=""><img alt=""><img alt=""></div>
+    <div class="pose" role="img" aria-label="Nik em várias poses, trocando conforme você rola"><div class="pp" id="pp"></div></div>
+    <div class="ticks" id="ticks" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- 06 VOZ -->
+<section class="sec c scene" id="voz" data-n="06" style="--h:320svh">
+  <div class="st">
+    <span class="mono chap">06 · Voz</span>
+    <div>
+      <h2 class="h2" data-split>A gente leva o estilo a sério. O resto, nem tanto.</h2>
+      <div class="tg" role="group" aria-label="Regra de voz"><button aria-pressed="true" data-v="e">É</button><button aria-pressed="false" data-v="n">Não é</button></div>
+      <p class="reg lead" id="reg" aria-live="polite">Irônica e curta. Ri da própria rotina e dramatiza o pequeno. Piada interna: quem entende, entende.</p>
+    </div>
+    <div class="panel">
+      <div id="chat">
+        <div class="fl"><img src="assets/img/exp03.webp" alt="" loading="lazy"><div class="bb">Acordei. Já conta como cardio.</div></div>
+        <div class="fl d"><img src="assets/img/exp01.webp" alt="" loading="lazy"><div class="bb">Treino hoje? Talvez.</div></div>
+        <div class="fl"><img src="assets/img/exp06.webp" alt="" loading="lazy"><div class="bb">Descanso também é treino (confia).</div></div>
+        <div class="fl"><img src="assets/img/exp02.webp" alt="" loading="lazy"><div class="dots" aria-label="digitando"><i></i><i></i><i></i></div></div>
+      </div>
+      <ul id="nao" aria-label="O que a voz da Ironik não é">
+        <li class="mono">A voz da Ironik não é</li>
+        <li><span class="no">Motivacional.<i></i></span></li>
+        <li><span class="no">Piada com quem está começando.<i></i></span></li>
+        <li><span class="no">Gíria forçada.<i></i></span></li>
+        <li><span class="no">Explicação longa.<i></i></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 07 CORES -->
+<section class="sec k scene" id="cores" data-n="07" style="--h:340svh">
+  <div class="st">
+    <span class="mono chap">07 · Cores</span>
+    <h2 class="h2" data-split>O rabo vira cor.</h2>
+    <div class="rabo" id="raboW" aria-hidden="true"><i id="rabo"></i></div>
+    <div id="sw">
+      <button class="c1 on" style="background:#111;color:#E9E6DF;box-shadow:inset 0 0 0 1px rgba(233,230,223,.3)" data-hex="#111111" aria-label="Copiar o preto #111111"><span class="mono cp">copiar ↗</span><b>Preto</b><span class="info"><span class="mono">#111111</span><br><span class="rl">A base. Fundo das peças e da comunicação.</span></span></button>
+      <button class="c1" style="background:#E9E6DF;color:#111" data-hex="#E9E6DF" aria-label="Copiar o creme #E9E6DF"><span class="mono cp">copiar ↗</span><b>Creme</b><span class="info"><span class="mono">#E9E6DF</span><br><span class="rl">Texto sobre preto e fundo claro.</span></span></button>
+      <button class="c1" style="background:#BDBDBD;color:#111" data-hex="#BDBDBD" aria-label="Copiar o cinza #BDBDBD"><span class="mono cp">copiar ↗</span><b>Cinza</b><span class="info"><span class="mono">#BDBDBD</span><br><span class="rl">Apoio. O pelo do Nik clássico.</span></span></button>
+      <button class="c1" style="background:#FF2E7E;color:#111" data-hex="#FF2E7E" aria-label="Copiar o rosa #FF2E7E"><span class="mono cp">copiar ↗</span><b>Rosa</b><span class="info"><span class="mono">#FF2E7E</span><br><span class="rl">A assinatura. Rosa sobre preto libera texto (5,3:1).</span></span></button>
+    </div>
+    <div class="ct" id="ct"><span class="pill k mono" style="box-shadow:inset 0 0 0 1.5px var(--p);color:var(--c)">rosa sobre preto · 5,3:1 · texto liberado</span><span class="pill k mono" style="box-shadow:inset 0 0 0 1.5px var(--c);color:var(--c)">creme sobre rosa · 2,8:1 · só grafismo</span></div>
+  </div>
+</section>
+
+<!-- 08 TIPOGRAFIA -->
+<section class="sec c scene" id="tipo" data-n="08" style="--h:300svh">
+  <div class="st">
+    <span class="mono chap">08 · Tipografia</span>
+    <h2 class="h2" data-split style="font-size:clamp(30px,3.6vw,52px)">Aperte até ficar certo.</h2>
+    <input class="big" id="big" value="Só mais uma." aria-label="Digite a sua frase para testar o espaçamento" spellcheck="false" autocomplete="off">
+    <div class="sl"><input type="range" id="rg" min="-6" max="10" step="1" value="6" aria-label="Espaçamento entre letras"><span class="mono lb no" id="lb">Espaçamento +6% · solto demais</span></div>
+    <div id="esp"><div><small class="mono">Títulos</small><p class="t1">Archivo Black</p></div><div><small class="mono">Texto corrido</small><p>Archivo, entrelinha 150%, boa de ler em corpo pequeno.</p></div><div><small class="mono">Microtexto</small><p class="t3">Ironik Athletic Dept. · est. 2026</p></div></div>
+  </div>
+</section>
+
+<!-- 09 VISTA A IDEIA -->
+<section class="sec p scene" id="vista" data-n="09" style="--h:380svh">
+  <div class="st">
+    <span class="mono chap">09 · Vista a ideia</span>
+    <div>
+      <h2 class="h2" data-split>Vista a ideia.</h2>
+      <p class="lead" style="margin-top:20px;max-width:22em">Role e a camiseta se veste sozinha. Ou escolha você: cor, estampa e selos para arrastar.</p>
+      <p class="mono stp" id="vstep">Passo 01/04 · Só mais uma rep</p>
+      <div class="opt"><p class="mono">Cor</p><div class="cr" role="group" aria-label="Cor da camiseta"><button class="kk" aria-pressed="true" data-t="#111111" aria-label="Preta"></button><button class="cc" aria-pressed="false" data-t="#E9E6DF" aria-label="Creme"></button></div></div>
+      <div class="opt"><p class="mono">Estampa</p><div class="es" role="group" aria-label="Estampa"><button aria-pressed="true" data-a="rep" aria-label="Só mais uma rep"><img src="assets/img/estampa-rep.webp" alt="" loading="lazy"></button><button aria-pressed="false" data-a="bulking" aria-label="Bulking"><img src="assets/img/estampa-bulking.webp" alt="" loading="lazy"></button><button class="cremev" aria-pressed="false" data-a="99" aria-label="99% preguiça"><img src="assets/img/estampa-99.webp" alt="" loading="lazy"></button></div></div>
+    </div>
+    <div id="vst">
+      <svg class="tee" viewBox="0 0 560 600" aria-hidden="true"><path d="M 150 10 L 205 0 Q 280 50 355 0 L 410 10 L 560 120 L 480 205 L 430 170 L 430 600 L 130 600 L 130 170 L 80 205 L 0 120 Z"/></svg>
+      <img id="art" src="assets/img/estampa-rep.webp" alt="Estampa na camiseta" loading="lazy">
+      <div id="tray"><div class="dr"><img src="assets/img/selo.svg" alt="Selo do Nik espiando" width="60"></div><div class="dr"><img src="assets/img/estrela.svg" alt="Estrela rosa" width="46"></div><div class="dr"><img src="assets/img/tag-rosa.svg" alt="Tag com coroa" width="64"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 APLICAÇÕES -->
+<section class="sec k" id="apps" data-n="10">
+  <div class="stick" id="aStage">
+    <div class="head"><h2 class="h2" data-split>Na rua, no sofá, no pedido.</h2><span id="acnt" aria-hidden="true">01<small>/06</small></span></div>
+    <div id="trk">
+      <figure class="cd"><img src="assets/img/m-skate.webp" alt="Dois amigos de camiseta Ironik num skate park ao fim da tarde" loading="lazy"><figcaption class="pill c mono">skate, fim de tarde</figcaption><span class="mono no">01</span></figure>
+      <figure class="cd"><img src="assets/img/m-lambe.webp" alt="Lambe-lambe da Ironik num muro" loading="lazy"><figcaption class="pill c mono">lambe-lambe</figcaption><span class="mono no">02</span></figure>
+      <figure class="cd"><img src="assets/img/m-setup.webp" alt="Setup gamer com peças da Ironik" loading="lazy"><figcaption class="pill c mono">setup gamer</figcaption><span class="mono no">03</span></figure>
+      <figure class="cd"><img src="assets/img/m-unboxing.webp" alt="Caixa da Ironik aberta sobre a cama" loading="lazy"><figcaption class="pill c mono">o pedido chegou</figcaption><span class="mono no">04</span></figure>
+      <figure class="cd"><img src="assets/img/m-popup.webp" alt="Loja pop-up da Ironik" loading="lazy"><figcaption class="pill c mono">pop-up</figcaption><span class="mono no">05</span></figure>
+      <figure class="cd"><img src="assets/img/m-ecobag.webp" alt="Ecobag da Ironik no metrô" loading="lazy"><figcaption class="pill c mono">ecobag no metrô</figcaption><span class="mono no">06</span></figure>
+    </div>
+    <div class="apb" aria-hidden="true"><i id="apbi"></i></div>
+  </div>
+</section>
+
+<!-- 11 FIGURINHAS -->
+<section class="sec c" id="fig" data-n="11">
+  <span class="mono chap">11 · Figurinhas</span>
+  <div class="wrap">
+    <div class="top"><h2 class="h2" data-split>45 figurinhas. Só mais uma.</h2><p class="lead" data-reveal style="max-width:20em">As colunas não param. Passe o mouse e elas quase param.</p></div>
+    <div class="loop" id="figLoop" aria-label="As figurinhas do Nik"></div>
+  </div>
+</section>
+
+<!-- 12 FECHO -->
+<section class="sec k cover" id="fecho" data-n="12">
+  <span class="mono chap">12 · Fecho</span>
+  <div class="in">
+    <h2 class="h1" data-split>Só mais uma <span class="pk">conversa?</span></h2>
+    <p class="sb" data-reveal>Parceria, pedido ou só mais uma ideia.</p>
+    <a class="btn" id="cta" data-btn data-magnetic href="https://wa.me/5511968186328?text=Ol%C3%A1%2C%20Rel%C3%B4!%20Vi%20o%20manual%20da%20Ironik%20e%20quero%20conversar." target="_blank" rel="noopener"><span class="fill"></span>Falar no WhatsApp ↗</a><a class="mono lk" href="https://reeloagencia.com/">reeloagencia.com</a>
+  </div>
+  <div class="vis" aria-hidden="true"><div class="a"><img src="assets/img/exp01.webp" alt="" loading="lazy"></div><div class="b"><img src="assets/img/joinha.webp" alt="" loading="lazy"><span class="pill c mono">fechou.</span></div></div>
+  <div class="giant" aria-hidden="true" data-giant><canvas id="gcv" width="1000" height="142"></canvas></div>
+  <div class="ft mono"><span>Ironik · Apresentação da identidade visual</span><a href="#capa">VOLTAR AO TOPO ↑</a></div>
+</section>
+</main>
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script src="assets/ironik.js"></script>
+</body>
+</html>
